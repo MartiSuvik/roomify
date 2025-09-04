@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roomify - Personalized Interior Design in Minutes</title>
+    <meta name="description" content="Magically generate perspective views of your interior designs from a floor plan. AI-powered interior design assistance." />
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+	createChat({
+		webhookUrl: 'https://n8n.effichat.com/webhook/29a81d98-6ecd-4aab-80f4-a9ff28dd647e/chat',
+		initialMessages: [
+			'Hi there! 👋',
+			'My name is EFFI. How can I assist you today?'
+		]
+	});
+</script>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://roomify.dev/" />
+    <meta property="og:title" content="Roomify - Personalized Interior Design in Minutes" />
+    <meta property="og:description" content="Magically generate perspective views of your interior designs from a floor plan. AI-powered interior design assistance." />
+    <meta property="og:image" content="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://roomify.dev/" />
+    <meta property="twitter:title" content="Roomify - Personalized Interior Design in Minutes" />
+    <meta property="twitter:description" content="Magically generate perspective views of your interior designs from a floor plan. AI-powered interior design assistance." />
+    <meta property="twitter:image" content="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

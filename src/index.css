@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  
+  color-scheme: light dark;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 217 91% 60%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217 91% 60%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --tile: hsl(var(--primary) / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-size: 17px;
+  }
+  
+  .dark {
+    --tile: hsl(var(--primary) / 0.15);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+  }
+}
+
+/* React Photo View Customization */
+.PhotoView-Portal {
+  --photoview-backdrop: rgba(0, 0, 0, 0.8);
+}
+
+.dark .PhotoView-Portal {
+  --photoview-backdrop: rgba(0, 0, 0, 0.9);
+}
+/* n8n Chatbot Customization */
+:root {
+  /* Brand Colors */
+  --chat--color-primary: hsl(217, 91%, 60%);
+  --chat--color-primary-shade-50: hsl(217, 91%, 55%);
+  --chat--color-primary-shade-100: hsl(217, 91%, 50%);
+  --chat--color-secondary: hsl(217, 91%, 60%);
+  --chat--color-secondary-shade-50: hsl(217, 91%, 55%);
+  --chat--color-white: hsl(0, 0%, 100%);
+  --chat--color-light: hsl(0, 0%, 96.1%);
+  --chat--color-light-shade-50: hsl(0, 0%, 89.8%);
+  --chat--color-light-shade-100: hsl(0, 0%, 85%);
+  --chat--color-medium: hsl(0, 0%, 82%);
+  --chat--color-dark: hsl(0, 0%, 3.9%);
+  --chat--color-disabled: hsl(0, 0%, 45.1%);
+  --chat--color-typing: hsl(0, 0%, 25%);
+
+  /* Rounded corners - matching brand design */
+  --chat--border-radius: 0.5rem;
+  --chat--spacing: 1rem;
+  --chat--transition-duration: 0.2s;
+
+  /* Window sizing */
+  --chat--window--width: 400px;
+  --chat--window--height: 600px;
+
+  /* Header styling */
+  --chat--header-height: auto;
+  --chat--header--padding: var(--chat--spacing);
+  --chat--header--background: var(--chat--color-primary);
+  --chat--header--color: hsl(0, 0%, 100%);
+  --chat--header--border-top: none;
+  --chat--header--border-bottom: none;
+  --chat--heading--font-size: 1.25rem;
+  --chat--subtitle--font-size: 0.875rem;
+  --chat--subtitle--line-height: 1.6;
+
+  /* Input styling */
+  --chat--textarea--height: 50px;
+
+  /* Message styling */
+  --chat--message--font-size: 0.875rem;
+  --chat--message--padding: 0.75rem;
+  --chat--message--border-radius: 0.5rem;
+  --chat--message-line-height: 1.6;
+  --chat--message--bot--background: var(--chat--color-light);
+  --chat--message--bot--color: var(--chat--color-dark);
+  --chat--message--bot--border: 1px solid var(--chat--color-light-shade-50);
+  --chat--message--user--background: var(--chat--color-primary);
+  --chat--message--user--color: var(--chat--color-white);
+  --chat--message--user--border: none;
+  --chat--message--pre--background: hsl(0, 0%, 95%);
+
+  /* Toggle button styling */
+  --chat--toggle--background: var(--chat--color-primary);
+  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+  --chat--toggle--active--background: var(--chat--color-primary-shade-100);
+  --chat--toggle--color: var(--chat--color-white);
+  --chat--toggle--size: 64px;
+}
+
+/* Dark theme support for chatbot */
+.dark {
+  --chat--color-white: hsl(0, 0%, 3.9%);
+  --chat--color-light: hsl(0, 0%, 14.9%);
+  --chat--color-light-shade-50: hsl(0, 0%, 20%);
+  --chat--color-light-shade-100: hsl(0, 0%, 25%);
+  --chat--color-medium: hsl(0, 0%, 30%);
+  --chat--color-dark: hsl(0, 0%, 98%);
+  --chat--color-disabled: hsl(0, 0%, 63.9%);
+  --chat--color-typing: hsl(0, 0%, 80%);
+  
+  --chat--message--bot--background: var(--chat--color-light);
+  --chat--message--bot--color: var(--chat--color-dark);
+  --chat--message--bot--border: 1px solid var(--chat--color-light-shade-50);
+  --chat--message--pre--background: hsl(0, 0%, 10%);
+}
+
+/* Additional styling for better integration */
+#n8n-chat {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Fix input text color */
+#n8n-chat input,
+#n8n-chat textarea {
+  color: var(--chat--color-dark) !important;
+}
+
+/* Custom shadow for chat window */
+#n8n-chat .chat-window {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-radius: var(--chat--border-radius);
+}
+
+/* Toggle button shadow */
+#n8n-chat .chat-toggle {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: var(--chat--border-radius);
+}
