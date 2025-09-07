@@ -167,20 +167,34 @@ export function StylizePage() {
   };
 
   const handleGenerate = async () => {
+    console.log('🚀 Starting handleGenerate function');
+    console.log('📊 Current state:', {
+      hasApiKey,
+      currentRoomImage: !!currentRoomImage,
+      uploadMode,
+      selectedStyle,
+      customInstructions: customInstructions.trim(),
+      styleReferenceImage: !!styleReferenceImage
+    });
+
     if (!hasApiKey) {
+      console.error('❌ No API key available');
       toast.error('Please add an OpenAI API key in Settings to use this feature');
       return;
     }
     if (!currentRoomImage) {
+      console.error('❌ No room image available');
       toast.error('Please upload your room photo');
       return;
     }
 
     setIsGenerating(true);
     goTo(3);
+    console.log('✅ Starting generation process');
 
     try {
       const apiKey = await getActiveApiKey('openai');
+      console.log('🔑 API Key retrieved:', apiKey ? 'Found' : 'Not found');
       if (!apiKey) throw new Error('OpenAI API key not found');
 
       let prompt = '';
@@ -195,34 +209,57 @@ export function StylizePage() {
         prompt =
           `Restyle the base photo to ${combined || 'the chosen style'}. Keep layout/geometry, preserve windows, doors, floor, and lighting. Avoid adding extra furniture unless necessary.`;
       }
+      console.log('📝 Generated prompt:', prompt);
 
       const form = new FormData();
       form.append('model', 'gpt-image-1');
       form.append('prompt', prompt);
       if (uploadMode === 'dual' && styleReferenceImage) {
+        console.log('🖼️ Adding style reference image');
         form.append('image[]', dataUrlToFile(styleReferenceImage, 'reference.png'));
       }
+      console.log('🖼️ Adding current room image');
       form.append('image[]', dataUrlToFile(currentRoomImage, 'base.png'));
       form.append('size', '1536x1024');
       form.append('n', '1');
       form.append('quality', 'medium');
 
+      // Log FormData contents
+      console.log('📦 FormData contents:');
+      for (let [key, value] of form.entries()) {
+        if (value instanceof File) {
+          console.log(`  ${key}: File (${value.name}, ${value.size} bytes, ${value.type})`);
+        } else {
+          console.log(`  ${key}: ${value}`);
+        }
+      }
+
+      console.log('🌐 Making API call to OpenAI...');
       const imageRes = await fetch('https://api.openai.com/v1/images/edits', {
         method: 'POST',
         headers: { Authorization: `Bearer ${apiKey}` },
         body: form,
       });
 
+      console.log('📡 API Response:', {
+        status: imageRes.status,
+        statusText: imageRes.statusText,
+        ok: imageRes.ok
+      });
+
       if (!imageRes.ok) {
         const errText = await imageRes.text();
+        console.error('❌ API Error Response:', errText);
         throw new Error(`Images Edits error ${imageRes.status}: ${errText}`);
       }
 
       const imageJson = await imageRes.json();
+      console.log('📋 API Response JSON:', imageJson);
       const b64 = imageJson?.data?.[0]?.b64_json;
       if (!b64) throw new Error('No image returned');
 
       const generatedImageUrl = `data:image/png;base64,${b64}`;
+      console.log('🎨 Generated image URL length:', generatedImageUrl.length);
       setGeneratedImage(generatedImageUrl);
 
       const newHistoryItem = {
@@ -235,11 +272,14 @@ export function StylizePage() {
         resultImage: generatedImageUrl,
       };
       setHistory(prev => [newHistoryItem, ...prev]);
+      console.log('✅ Generation completed successfully');
       toast.success('Image generated successfully!');
     } catch (err: any) {
-      console.error(err);
+      console.error('💥 Generation failed:', err);
+      console.error('💥 Full error object:', JSON.stringify(err, null, 2));
       toast.error(err?.message || 'Failed to generate image');
     } finally {
+      console.log('🏁 Generation process finished');
       setIsGenerating(false);
     }
   };
