@@ -613,8 +613,8 @@ export function StylizePage() {
                           Back to Upload
                         </Button>
                         {canProceedToStep3() ? (
-                          <Button onClick={() => goTo(3)} className="h-11 px-8">
-                            Generate My Room
+                          <Button onClick={handleGenerate} disabled={!hasApiKey || isGenerating} className="h-11 px-8">
+                            {isGenerating ? 'Generating…' : 'Generate My Room'}
                           </Button>
                         ) : (
                           <Button disabled className="h-11 px-8">
