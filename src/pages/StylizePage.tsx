@@ -200,7 +200,7 @@ export function StylizePage() {
       let prompt = '';
       if (uploadMode === 'dual' && styleReferenceImage) {
         prompt =
-          `Use the FIRST image as the base photo. Copy furniture/finishes from the SECOND image while keeping the room architecture, camera angle, walls, floor, windows, lighting, and proportions. ` +
+          `Use the FIRST image as the base photo. Copy only the furniture piece from the SECOND image and add it to the first image. Keeping the room architecture, camera angle, walls, floor, windows, lighting, and proportions exactly the same in the first image and only change the furniture(s) requested below.` +
           (customInstructions?.trim() ? `Notes: ${customInstructions.trim()}` : '');
       } else {
         const styleText = selectedStyle && selectedStyle !== 'None' ? `${selectedStyle} style` : '';
